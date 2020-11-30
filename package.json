@@ -1,0 +1,22 @@
+{
+  "name": "advent-of-code-2020",
+  "version": "1.0.0",
+  "description": "Advent of Code 2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha day-**/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adriennetacke/advent-of-code-2020.git"
+  },
+  "author": "Adrienne Tacke <adrienne.tacke@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adriennetacke/advent-of-code-2020/issues"
+  },
+  "homepage": "https://github.com/adriennetacke/advent-of-code-2020#readme",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
+}
