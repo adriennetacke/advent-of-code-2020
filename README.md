@@ -31,7 +31,7 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 |---|:---:|:---:|
 | ✔ [Day 1: Report Repair](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-1)| 🌟 | 🌟 |
 | ✔ [Day 2: Password Philosophy](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-2)| 🌟 | 🌟 |
-| [Day 3: TBD]()| | |
+| ✔ [Day 3: Toboggan Trajectory](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-3)| 🌟 | 🌟 |
 | [Day 4: TBD]()| | |
 | [Day 5: TBD]()| | |
 | [Day 6: TBD]()| | |
