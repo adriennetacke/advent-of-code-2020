@@ -15,38 +15,25 @@ const one = (input) => {
     }
   }
 
-  const codes = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid', 'cid'];
+  const codes = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
 
   return sortedPassports
-    .map(passport => {
-      let combinedInfo = '';
+    .reduce((validPassports, currentPassport) => {
+      const consolidatedPassport = currentPassport.join(' ');
 
-      passport.map(info => {
-        combinedInfo += info;
-      });
-
-      return combinedInfo;
-    })
-    .map(consolidatedPassport => {
       let verifiedCodes = [];
-      
-      codes.map(code => {
+
+      codes.forEach(code => {
         if (consolidatedPassport.includes(code)) {
           verifiedCodes.push(code);
         }
       });
 
-      // All codes present
-      if (verifiedCodes.length > 7) return 1;
+      // All required codes present
+      if (verifiedCodes.length == 7) return validPassports + 1;
 
-      // Check that none of minimum number of required codes is 'cid'
-      if (verifiedCodes.length == 7 && !verifiedCodes.includes('cid')) {
-        return 1;
-      }
-    })
-    .reduce((validPassports, currentPassport) => {
-      const anotherOne = isNaN(currentPassport) ? 0 : currentPassport;
-      return validPassports + anotherOne;
+      return validPassports;
+
     }, 0);
 }
 
