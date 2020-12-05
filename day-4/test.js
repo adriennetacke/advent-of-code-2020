@@ -22,7 +22,7 @@ iyr:2011 ecl:brn hgt:59in`;
 });
 
 describe('Part Two', () => {
-  it('should return 4 valid passports', () => {
+ it('should return 4 valid passports', () => {
     let input = `eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
 

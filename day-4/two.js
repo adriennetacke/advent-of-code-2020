@@ -5,7 +5,6 @@ const two = (input) => {
 
   // Sort codes into single passports
   for (let i = 0; i < passports.length; i++) {
-    // console.log(i, passports[i]);
     if (passports[i] !== '') {
       temp.push(passports[i]);
     }
@@ -16,63 +15,105 @@ const two = (input) => {
     }
   }
 
-  const codes = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid', 'cid'];
+  const codes = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
 
-  let verifiedPassports = sortedPassports
-    .map(passport => {
-      // console.log("passport", passport);
-      let combinedInfo = '';
-
-      passport.map(info => {
-        combinedInfo += info;
-      });
-
-      return combinedInfo;
-    })
-    .map(consolidatedPassport => {
+  return sortedPassports
+    .reduce((validPassports, currentPassport) => {
+      const consolidatedPassport = currentPassport.join(' ');
       let verifiedCodes = [];
+      let validatedCodes = [];
 
-      codes.map(code => {
+      // First check all required codes are present
+      codes.forEach(code => {
         if (consolidatedPassport.includes(code)) {
           verifiedCodes.push(code);
         }
       });
 
-      // console.log("consolidatedPassport", consolidatedPassport);
-      if (verifiedCodes.length > 7) return consolidatedPassport;
+      const isVerified = codes.every(x => verifiedCodes.includes(x));
 
-      if (verifiedCodes.length == 7 && !verifiedCodes.includes('cid')) {
-        return consolidatedPassport;
-      }
-    })
-    .map(verifiedPassport => {
-      console.log("here", verifiedPassport);
-      const [, , byr] = /(byr)\:(\d*)/.exec(verifiedPassport);
-      const [, , iyr] = /(iyr)\:(\d*)/.exec(verifiedPassport);
-      const [, , eyr] = /(eyr)\:(\d*)/.exec(verifiedPassport);
-      const [, , hgt, unit] = /(hgt)\:(\d*)(c*m*i*n*\s*)/.exec(verifiedPassport);
-      const [, , hashSign, hcl] = /(hcl)\:(\#*)([0-9a-f]*)/.exec(verifiedPassport);
-      const [, , ecl] = /(ecl)\:([a-z]{3})/.exec(verifiedPassport);
-      const [, , pid] = /(pid)\:([0-9]{9})/.exec(verifiedPassport);
+      if (!isVerified) return validPassports;
 
-      // Have matches for codes
-      // Need to validate based on rules for specific code
+      // Find codes and their values
+      const [, , byr] = /(byr):(\d{4})/.exec(consolidatedPassport);
+      const [, , iyr] = /(iyr):(\d{4})/.exec(consolidatedPassport);
+      const [, , eyr] = /(eyr):(\d{4})/.exec(consolidatedPassport);
+      const [, , hgt, unit] = /(hgt):(\d+)(cm|in)?/.exec(consolidatedPassport);
+      const [, , hcl] = /(hcl):(#[0-9a-f]{6})?/.exec(consolidatedPassport);
+      const [, , ecl] = /(ecl):(amb|blu|brn|gry|grn|hzl|oth)?/.exec(consolidatedPassport);
+      const [, , pid] = /(pid):(\d*)?/.exec(consolidatedPassport);
 
-      if (byr >= 1920 && byr <= 2002) {
-        // add to array? 
-        // if array.length = required valid states, count  as valid passport
-      }
+      // Perform individual code's validation rules
+      codes.forEach(code => {
+        switch (code) {
+          case 'byr': 
+            if (byr >= 1920 && byr <= 2002) {
+              validatedCodes.push(code);
+            }
+          
+            break;
+          
+          case 'iyr': 
+            if (iyr >= 2010 && iyr <= 2020) {
+              validatedCodes.push(code);
+            }
+          
+            break;
+          
+          case 'eyr': 
+            if (eyr >= 2020 && eyr <= 2030) {
+              validatedCodes.push(code);
+            }
+          
+            break;
+          
+          case 'hgt': 
+            if (hgt && unit) {
+              if (unit.trim() === 'cm' && hgt >= 150 && hgt <= 193) {
+                validatedCodes.push(code);
+              } else if (unit.trim() === 'in' && hgt >= 59 && hgt <= 76) {
+                validatedCodes.push(code);
+              }
+            }
+          
+            break;
 
-      // TODO: The rest of the fucking codes
+          case 'hcl': 
+            if (hcl && hcl.startsWith('#')) {
+              if (hcl.substring(1).length === 6) {
+                validatedCodes.push(code);
+              }
+            }
+          
+            break;
 
-    });
+          case 'ecl':
+            const validEyeCodes = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'];
+            if (validEyeCodes.includes(ecl)) {
+              validatedCodes.push(code);
+            }
+          
+            break;
 
+          case 'pid': 
+            if (pid && pid.length === 9) {
+              validatedCodes.push(code);
+            }
+          
+            break;
 
+          default:
+            break;
+        }
+      });
+      
+      const isValidated = codes.every(x => validatedCodes.includes(x));
+      
+      if (isValidated) return validPassports + 1;
 
-  // .reduce((validPassports, currentPassport) => {
-  //   const anotherOne = isNaN(currentPassport) ? 0 : currentPassport;
-  //   return validPassports + anotherOne;
-  // }, 0);
+      return validPassports;
+
+    }, 0);
 }
 
 module.exports = two;
