@@ -2,6 +2,7 @@ const one = (input) => {
   let rules = input.split('\n');
   let allbags = {};
 
+  // Create main object with all bags and their respective inner bags
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
 
@@ -24,6 +25,9 @@ const one = (input) => {
     });  
   }
   
+ // Recursive Helper function to continue path traversal
+ // until we reach the end -> either a 'shiny gold' bag or
+ // no other children
   let validBags = new Set();
 
   function findPaths(child, topLevelParent) {
@@ -41,6 +45,7 @@ const one = (input) => {
     }
   } 
 
+  // Traverse paths to a 'shiny gold' bag
   const topLevelBags = Object.keys(allbags);
 
   for (let i = 0; i < topLevelBags.length; i++) {
