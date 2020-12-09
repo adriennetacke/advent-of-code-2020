@@ -91,4 +91,4 @@ After the last instruction (`acc +6`), the program terminates by attempting to r
 Fix the program so that it terminates normally by changing exactly one `jmp` (to `nop`) or `nop` (to `jmp`). **What is the value of the accumulator after the program terminates?**
 
 ## References
-- https://adventofcode.com/2020/day/8
+https://adventofcode.com/2020/day/8
