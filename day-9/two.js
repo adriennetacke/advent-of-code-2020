@@ -30,7 +30,7 @@ const two = (input, preambleLength) => {
       if (runningTotal === invalidNumber) {
         const sorted = range.sort((a, b) => a - b);
 
-        return sorted[0] + sorted[sorted.length - 1];
+        return sorted[0] + sorted.slice(-1)[0];
       };
     }
   }
