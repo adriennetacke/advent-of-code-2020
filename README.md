@@ -39,8 +39,8 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 | ✔ [Day 8: Handheld Halting](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-8)| 🌟 | 🌟 |
 | ✔ [Day 9: Encoding Error](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-9)| 🌟 | 🌟 |
 | ⏳ [Day 10: Adapter Array](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-10)| 🌟 | ⏳ |
-| [Day 11: TBD]()| | |
-| [Day 12: TBD]()| | |
+| ⏳ [Day 11: Seating System]()| ⏳ | ⏳ |
+| ✔ [Day 12: Rain Risk](https://github.com/adriennetacke/advent-of-code-2020/tree/main/day-12)| 🌟 | 🌟 |
 | [Day 13: TBD]()| | |
 | [Day 14: TBD]()| | |
 | [Day 15: TBD]()| | |
